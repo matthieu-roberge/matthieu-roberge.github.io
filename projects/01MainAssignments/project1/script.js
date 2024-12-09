@@ -1,5 +1,5 @@
-let cols = 20; // Nombre de colonnes
-let rows = 20; // Nombre de lignes
+let cols = 20; // colonnes
+let rows = 20; // lignes
 let plane = []; // Tableau pour stocker les sommets
 let amplitude //vibrations
 let customFont; 
@@ -12,19 +12,11 @@ function setup() {
   createCanvas(800, 800, WEBGL); 
 	//noCursor()
 
-
-  // Vérification si la police est bien chargée
-  if (!customFont) {
-    console.error('La police n’a pas été chargée.');
-    noLoop(); // Stoppe l'animation si la police n'est pas chargée
-    return;
-  }
-
   textFont(customFont); 
   textSize(20); 
   textAlign(CENTER, CENTER); 
 
-  // (les sommets de la feuille)
+  //les sommets feuille
   for (let i = 0; i <= cols; i++) {
     plane[i] = [];
     for (let j = 0; j <= rows; j++) {
@@ -47,12 +39,12 @@ background(255, 206, 254);
   ambientLight(200);
   directionalLight(255, 255, 255, 1, 1, -1);
 
-  // Déformer la feuille
+  // Déformer feuille
   for (let i = 0; i <= cols; i++) {
     for (let j = 0; j <= rows; j++) {
       let time = millis() * speed; // Temps pour animer
       let wave = sin(time + i * 0.3 + j * 0.3); // Déformation ondulée
-      plane[i][j].z = wave * amplitude; // Changer la hauteur (z)
+      plane[i][j].z = wave * amplitude; // Changer la hauteur
     }
   }
 
@@ -74,12 +66,12 @@ background(255, 206, 254);
   fill(255, 206, 254); 
   for (let i = 0; i <= cols; i+=2) {
     for (let j = 0; j <= rows; j+=2) {
-      if ((i + j) % 4 === 0) { // Ajouter du texte de manière espacée
+      if ((i + j) % 4 === 0) { // espace entre texte
         push();
         let v = plane[i][j];
         translate(v.x, v.y, v.z + 5); // Positionner le texte au-dessus de la surface
         rotateX( 0 ); // Ajuster l'orientation pour qu'il soit lisible
-        text('Hello Zhdk', 0, 0); // Texte à afficher
+        text('Hello Zhdk', 0, 0);
         pop();
       }
     }
